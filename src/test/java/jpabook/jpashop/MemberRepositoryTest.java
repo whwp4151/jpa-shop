@@ -2,6 +2,7 @@ package jpabook.jpashop;
 
 import java.util.Optional;
 import javax.transaction.Transactional;
+import jpabook.jpashop.domain.Member;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
