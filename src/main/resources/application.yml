@@ -9,8 +9,10 @@ spring:
     hibernate:
       ddl-auto: create
     properties:
-#      show_sql: true
-      format_sql: true
+      hibernate:
+#        show_sql: true
+        format_sql: true
+        default_batch_fetch_size: 100 #컬렉션이나, 프록시 객체를 한꺼번에 설정한 size 만큼 IN 쿼리로 조회한다.
 
 logging:
   level:
