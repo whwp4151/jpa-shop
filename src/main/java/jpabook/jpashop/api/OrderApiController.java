@@ -8,12 +8,15 @@ import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
 import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.repository.OrderRepository;
+import jpabook.jpashop.repository.OrderSearch;
 import jpabook.jpashop.repository.order.query.OrderQueryDto;
 import jpabook.jpashop.service.OrderService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -66,6 +69,12 @@ public class OrderApiController {
     @GetMapping("/api/v6/orders")
     public List<OrderQueryDto> ordersV6() {
         return orderService.findAllByDto_flat();
+    }
+
+    @PostMapping("/api/v1/findAll")
+    public String findAll(@RequestBody OrderSearch orderSearch) {
+        orderService.findOrders(orderSearch);
+        return "success";
     }
 
     @Data

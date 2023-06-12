@@ -11,7 +11,9 @@ import jpabook.jpashop.domain.OrderItem;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.repository.ItemRepository;
 import jpabook.jpashop.repository.MemberRepository;
+import jpabook.jpashop.repository.OrderQuerydslRepository;
 import jpabook.jpashop.repository.OrderRepository;
+import jpabook.jpashop.repository.OrderSearch;
 import jpabook.jpashop.repository.order.query.OrderFlatDto;
 import jpabook.jpashop.repository.order.query.OrderItemQueryDto;
 import jpabook.jpashop.repository.order.query.OrderQueryDto;
@@ -27,6 +29,7 @@ public class OrderService {
     private final MemberRepository memberRepository;
     private final ItemRepository itemRepository;
     private final OrderQueryRepository orderQueryRepository;
+    private final OrderQuerydslRepository orderQuerydslRepository;
 
     public Long order(Long memberId, Long itemId, int count) {
         Member member = memberRepository.findById(memberId).get();
@@ -50,8 +53,8 @@ public class OrderService {
         order.cancel();
     }
 
-    public List<Order> findOrders() {
-        return orderRepository.findAll();
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderQuerydslRepository.findAll(orderSearch);
     }
 
     public List<OrderQueryDto> findOrderQueryDtos() {
